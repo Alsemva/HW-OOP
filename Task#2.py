@@ -27,7 +27,7 @@ class Mentor:
 
 class Lecturer(Mentor):
     def __init__(self, name, surname):
-        super().__init__(self, name, surname)
+        super().__init__(name, surname)
         self.grades = {}
 
 
@@ -52,7 +52,7 @@ cool_lecturer = Lecturer('Ivan', 'Petrov')
 cool_lecturer.courses_attached += ['Python']
 
 best_student.rate_hw(cool_lecturer, 'Python', 10)
-best_student.rate_hw(cool_lecturer, 'Python', 7)
+best_student.rate_hw(cool_lecturer, 'Python', 9)
 best_student.rate_hw(cool_lecturer, 'Python', 10)
 
 cool_reviewer.rate_hw(best_student, 'Python', 10)
