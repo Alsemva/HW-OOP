@@ -17,6 +17,21 @@ class Student:
         else:
             return 'Ошибка'
 
+    def _average_grades(self):
+        sum_grades = 0
+        counter = 0
+        for item in self.grades.values():
+            sum_grades += sum(item)
+            counter += len(item)
+        average = round(sum_grades / counter, 1)
+        return average
+
+    def __str__(self):
+        res = f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за домашние задания: {self._average_grades()}\
+        \nКурсы в процессе изучения: {", ".join(self.courses_in_progress)}\
+        \nЗавершенные курсы: {", ".join(self.finished_courses)}'
+        return res
+
 
 class Mentor:
     def __init__(self, name, surname):
@@ -30,6 +45,19 @@ class Lecturer(Mentor):
         super().__init__(name, surname)
         self.grades = {}
 
+    def _average_grades(self):
+        sum_grades = 0
+        counter = 0
+        for item in self.grades.values():
+            sum_grades += sum(item)
+            counter += len(item)
+        average = round(sum_grades / counter, 1)
+        return average
+
+    def __str__(self):
+        res = f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {self._average_grades()}'
+        return res
+
 
 class Reviewer(Mentor):
     def rate_hw(self, student, course, grade):
@@ -41,9 +69,15 @@ class Reviewer(Mentor):
         else:
             return 'Ошибка'
 
+    def __str__(self):
+        res = f'Имя: {self.name}\nФамилия: {self.surname}'
+        return res
+
 
 best_student = Student('Ruoy', 'Eman', 'your_gender')
 best_student.courses_in_progress += ['Python']
+best_student.courses_in_progress += ['Git']
+best_student.finished_courses += ['Введение в программирование']
 
 cool_reviewer = Reviewer('Some', 'Buddy')
 cool_reviewer.courses_attached += ['Python']
@@ -59,5 +93,6 @@ cool_reviewer.rate_hw(best_student, 'Python', 10)
 cool_reviewer.rate_hw(best_student, 'Python', 10)
 cool_reviewer.rate_hw(best_student, 'Python', 10)
 
-print(best_student.grades)
-print(cool_lecturer.grades)
+print(cool_reviewer)
+print(cool_lecturer)
+print(best_student)
