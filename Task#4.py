@@ -94,13 +94,24 @@ class Reviewer(Mentor):
         return res
 
 
-def average_grades_all_students(student_list, course):
+def average_grades_all_students(students_list, course):
     counter = 0
     sum_grades = 0
-    for student in student_list:
+    for student in students_list:
         if course in student.grades:
             counter += len(student.grades[course])
             sum_grades += sum(student.grades[course])
+    average = round(sum_grades / counter, 1)
+    return average
+
+
+def average_grades_all_lecturers(lecturers_list, course):
+    counter = 0
+    sum_grades = 0
+    for lecturer in lecturers_list:
+        if course in lecturer.grades:
+            counter += len(lecturer.grades[course])
+            sum_grades += sum(lecturer.grades[course])
     average = round(sum_grades / counter, 1)
     return average
 
@@ -157,5 +168,8 @@ print(cool_lecturer == cool_lecturer_2)
 print(best_student < best_student_2)
 print(best_student != best_student_2)
 
-student_list = [best_student, best_student_2]
-print(f"Средняя оценка по всем студентам: {average_grades_all_students(student_list, 'Python')}")
+students_list = [best_student, best_student_2]
+print(f"Средняя оценка по всем студентам: {average_grades_all_students(students_list, 'Python')}")
+
+lecturers_list = [cool_lecturer, cool_lecturer_2]
+print(f"Средняя оценка по всем лекторам: {average_grades_all_lecturers(lecturers_list, 'Python')}")
