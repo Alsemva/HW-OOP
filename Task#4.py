@@ -94,16 +94,30 @@ class Reviewer(Mentor):
         return res
 
 
+def average_grades_all_students(student_list, course):
+    counter = 0
+    sum_grades = 0
+    for student in student_list:
+        if course in student.grades:
+            counter += len(student.grades[course])
+            sum_grades += sum(student.grades[course])
+    average = round(sum_grades / counter, 1)
+    return average
+
+
 best_student = Student('Ruoy', 'Eman', 'your_gender')
-best_student.courses_in_progress += ['Python']
-best_student.courses_in_progress += ['Git']
+best_student.courses_in_progress += ['Python', 'Front-end', 'Git']
 best_student.finished_courses += ['Введение в программирование']
 
 best_student_2= Student('Igor', 'Knyaz', 'male')
-best_student_2.courses_in_progress += ['Python']
+best_student_2.courses_in_progress += ['Python', 'C++', 'Git']
+best_student_2.finished_courses += ['Введение в программирование', 'Английский в IT']
 
 cool_reviewer = Reviewer('Some', 'Buddy')
 cool_reviewer.courses_attached += ['Python']
+
+cool_reviewer_2 = Reviewer('Sim', 'Bud')
+cool_reviewer_2.courses_attached += ['C++']
 
 cool_lecturer = Lecturer('Ivan', 'Petrov')
 cool_lecturer.courses_attached += ['Python']
@@ -123,12 +137,25 @@ cool_reviewer.rate_hw(best_student, 'Python', 10)
 cool_reviewer.rate_hw(best_student, 'Python', 10)
 cool_reviewer.rate_hw(best_student, 'Python', 10)
 
+cool_reviewer_2.rate_hw(best_student_2, 'C++', 10)
+cool_reviewer_2.rate_hw(best_student_2, 'C++', 7)
+cool_reviewer_2.rate_hw(best_student_2, 'C++', 10)
 cool_reviewer.rate_hw(best_student_2, 'Python', 10)
-cool_reviewer.rate_hw(best_student_2, 'Python', 7)
 cool_reviewer.rate_hw(best_student_2, 'Python', 10)
 
-print(cool_reviewer)
-print(cool_lecturer)
-print(best_student)
+print(cool_reviewer, '\n')
+print(cool_reviewer_2, '\n')
+
+print(cool_lecturer, '\n')
+print(cool_lecturer_2, '\n')
+
+print(best_student, '\n')
+print(best_student_2, '\n')
+
 print(cool_lecturer > cool_lecturer_2)
-print(best_student > best_student_2)
+print(cool_lecturer == cool_lecturer_2)
+print(best_student < best_student_2)
+print(best_student != best_student_2)
+
+student_list = [best_student, best_student_2]
+print(f"Средняя оценка по всем студентам: {average_grades_all_students(student_list, 'Python')}")
